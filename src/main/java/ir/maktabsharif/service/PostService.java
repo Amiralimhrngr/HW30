@@ -9,7 +9,6 @@ import ir.maktabsharif.dto.PostRespDto;
 import ir.maktabsharif.exception.AppException;
 import ir.maktabsharif.repository.PostRepository;
 import ir.maktabsharif.repository.UserRepository;
-import ir.maktabsharif.util.HibernateUtil;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.List;
@@ -87,7 +86,7 @@ public class PostService {
         if (Optional.ofNullable(postReqDto).isEmpty()) {
             throw new AppException(HttpServletResponse.SC_BAD_REQUEST, "Post data is required.");
         }
-        if (postReqDto.title().isEmpty() || postReqDto.title().isBlank() || postReqDto.title().length() > 160) {
+        if (Optional.ofNullable(postReqDto.title()).isEmpty() || postReqDto.title().isEmpty() || postReqDto.title().isBlank() || postReqDto.title().length() > 160) {
             throw new AppException(HttpServletResponse.SC_BAD_REQUEST, "Title is required and must be at most 160 characters.");
         }
         if (postReqDto.content().isEmpty() || postReqDto.content().isBlank() || postReqDto.content().length() > 20000) {

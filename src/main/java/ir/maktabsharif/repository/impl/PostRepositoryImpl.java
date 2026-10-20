@@ -31,7 +31,7 @@ public class PostRepositoryImpl extends BaseRepositoryImpl<PostDao> implements P
                                 "select p from PostDao p join fetch p.author where p.id = :id",
                                 PostDao.class)
                         .setParameter("id", id)
-                        .getSingleResult()
+                        .getSingleResultOrNull()
         ));
     }
 

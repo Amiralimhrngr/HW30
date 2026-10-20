@@ -1,0 +1,37 @@
+body {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 15px;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+form, #postsList > div {
+    padding: 15px;
+    margin-bottom: 15px;
+    background: white;
+    border: 1px solid #ddd;
+}
+
+input, textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 7px 12px;
+    margin: 3px;
+    cursor: pointer;
+}
+
+#message {
+    color: #b00020;
+}
+
+#postsList p {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
