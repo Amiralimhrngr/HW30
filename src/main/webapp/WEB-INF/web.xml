@@ -27,6 +27,15 @@
         <url-pattern>/api/posts/*</url-pattern>
     </filter-mapping>
 
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/api/comments</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/api/comments/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>AuthServlet</servlet-name>
         <servlet-class>ir.maktabsharif.servlet.AuthServlet</servlet-class>
@@ -34,6 +43,19 @@
     <servlet-mapping>
         <servlet-name>AuthServlet</servlet-name>
         <url-pattern>/api/auth/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CommentServlet</servlet-name>
+        <servlet-class>ir.maktabsharif.servlet.CommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommentServlet</servlet-name>
+        <url-pattern>/api/comments</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentServlet</servlet-name>
+        <url-pattern>/api/comments/*</url-pattern>
     </servlet-mapping>
 
     <servlet>

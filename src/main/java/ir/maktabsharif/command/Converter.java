@@ -1,11 +1,9 @@
 package ir.maktabsharif.command;
 
+import ir.maktabsharif.dao.CommentDao;
 import ir.maktabsharif.dao.PostDao;
 import ir.maktabsharif.dao.UserDao;
-import ir.maktabsharif.dto.PostReqDto;
-import ir.maktabsharif.dto.PostRespDto;
-import ir.maktabsharif.dto.UserReqDto;
-import ir.maktabsharif.dto.UserRespDto;
+import ir.maktabsharif.dto.*;
 
 public class Converter {
     public static PostDao PostReqDtoToPostDao(PostReqDto postReqDto) {
@@ -37,6 +35,25 @@ public class Converter {
 
     public static UserRespDto UserDaoToUserRespDto(UserDao userDao) {
         return  new UserRespDto(userDao.getId(), userDao.getUsername(), userDao.getEmail());
+    }
+
+    public static CommentRespDto CommentDaoToCommentRespDto(CommentDao comment) {
+        return new CommentRespDto(
+                comment.getId(),
+                comment.getContent(),
+                comment.getAuthor().getId(),
+                comment.getAuthor().getUsername(),
+                comment.getPost().getId(),
+                comment.getCreatedAt(),
+                comment.getUpdatedAt()
+        );
+    }
+
+    public static CommentDao CommentReqDtoToCommentDao(CommentReqDto commentReqDto) {
+        return CommentDao
+                .builder()
+                .content(commentReqDto.content())
+                .build();
     }
 
 }

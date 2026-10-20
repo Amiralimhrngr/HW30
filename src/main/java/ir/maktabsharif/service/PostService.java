@@ -65,7 +65,12 @@ public class PostService {
         if (!postDao.getAuthor().getId().equals(currentUserId)) {
             throw new AppException(HttpServletResponse.SC_FORBIDDEN, "You can only edit your own posts.");
         }
-        return PostDaoToPostRespDto(postRepository.update(postId, PostReqDtoToPostDao(postReqDto)));
+        postRepository.update(postId, PostReqDtoToPostDao(postReqDto));
+
+        PostDao updatedPost = postRepository.findById(postId)
+                .orElseThrow(() -> new AppException(HttpServletResponse.SC_NOT_FOUND, "Post not found."));
+
+        return PostDaoToPostRespDto(updatedPost);
     }
 
     public void delete(Long currentUserId, Long postId) {
@@ -90,13 +95,13 @@ public class PostService {
             throw new AppException(HttpServletResponse.SC_BAD_REQUEST, "Title is required and must be at most 160 characters.");
         }
         if (postReqDto.content().isEmpty() || postReqDto.content().isBlank() || postReqDto.content().length() > 20000) {
-            throw new AppException(400, "Content is required and must be at most 20000 characters.");
+            throw new AppException(HttpServletResponse.SC_BAD_REQUEST, "Content is required and must be at most 20000 characters.");
         }
     }
 
     private void validateId(Long id) {
         if (id == null || id <= 0) {
-            throw new AppException(400, "A valid post ID is required.");
+            throw new AppException(HttpServletResponse.SC_BAD_REQUEST, "A valid post ID is required.");
         }
     }
 }
